@@ -22,4 +22,14 @@ export class AuthService {
   cadastrar(user:User): Observable <User>{
     return this.http.post <User> ('http://localhost:8080/usuarios/cadastrar',user)
   }
+
+  logado(){
+    let ok: boolean = false
+
+    if(environment.token != ''){
+      ok = true
+    }
+
+    return ok
+  }
 }
