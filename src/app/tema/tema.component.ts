@@ -17,30 +17,30 @@ export class TemaComponent implements OnInit {
   constructor(
     private router: Router,
     private temaService: TemaService
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
-    if (environment.token == '') {
-      alert('Sua seção expirou, faça o Login novamente')
-      this.findAllTemas()
-      this.router.navigate(['/entrar'])
+  ngOnInit(){
+    if(environment.token == ''){
+      this.router.navigate(["/entrar"])
     }
 
     this.findAllTemas()
   }
 
-  findAllTemas(){
-    this.temaService.getAllTema().subscribe((resp: Tema[]) =>{
+  findAllTemas() {
+    this.temaService.getAllTema().subscribe({
+      next: (resp: Tema[]) =>{
       this.listaTemas = resp
-    })
+      },
+    });
   }
 
-  cadastrar(){
+  cadastrar() {
     this.temaService.postTema(this.tema).subscribe((resp: Tema)=>{
       this.tema = resp
-      alert('Tema Cadastrado com sucesso')
-      this.tema = new Tema()
-    })
+      alert('Tema cadastrado') 
+      this.findAllTemas()
+      this.tema = new Tema
+      })
+    }
   }
-
-}

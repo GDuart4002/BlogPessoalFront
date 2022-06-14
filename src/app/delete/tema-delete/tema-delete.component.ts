@@ -20,27 +20,25 @@ export class TemaDeleteComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
-  ngOnInit() {
-
+  ngOnInit(){
     if(environment.token == ''){
-      alert('Sua seção expirou, faça o Login novamente')
-      this.router.navigate(['/entrar'])
+      alert('Sua sessão expirou, Logue novamente')
+      this.router.navigate(["/entrar"])
     }
     this.idTema = this.route.snapshot.params['id']
     this.findByIdTema(this.idTema)
   }
 
-  findByIdTema(id: number){
-    this.temaService.getByIdTema(id).subscribe((resp: Tema) =>{
+  findByIdTema(id: number) {
+    this.temaService.getByIdTema(id).subscribe((resp: Tema)=>{
       this.tema = resp
     })
   }
 
-  apagar(){
+  apagar() {
     this.temaService.deleteTema(this.idTema).subscribe(()=>{
-      alert("Tema apagado")
-      this.router.navigate(["/tema"])
+      alert('Tema apagado')
+      this.router.navigate(['/tema'])
     })
   }
-
 }
