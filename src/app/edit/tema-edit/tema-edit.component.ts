@@ -19,28 +19,27 @@ export class TemaEditComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
-  ngOnInit() {
-
+  ngOnInit(){
     if(environment.token == ''){
-      alert('Sua seção expirou, faça o Login novamente')
-      this.router.navigate(['/entrar'])
+      alert('Sua sessão expirou, Logue novamente')
+      this.router.navigate(["/entrar"])
     }
     let id = this.route.snapshot.params['id']
     this.findByIdTema(id)
   }
 
-  findByIdTema(id: number){
-    this.temaService.getByIdTema(id).subscribe((resp: Tema) =>{
+  findByIdTema(id: number) {
+    this.temaService.getByIdTema(id).subscribe((resp: Tema)=>{
       this.tema = resp
     })
   }
 
-  atualizar(){
+  atualizar() {
     this.temaService.putTema(this.tema).subscribe((resp: Tema)=>{
       this.tema = resp
-      alert("Tema atualizado")
+      alert('Tema atualizado')
       this.router.navigate(["/tema"])
     })
   }
-
+  
 }
